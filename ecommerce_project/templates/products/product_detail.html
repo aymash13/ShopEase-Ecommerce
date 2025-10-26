@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}{{ product.name }} - E-Commerce{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <img src="{{ product.main_image.url }}" class="img-fluid rounded shadow-sm" alt="{{ product.name }}">
+    </div>
+    <div class="col-md-6">
+        <h2>{{ product.name }}</h2>
+        <p class="text-muted">{{ product.category.name }}</p>
+        <p>{{ product.description }}</p>
+        <h4>
+            {% if product.is_on_sale %}
+                <span class="text-decoration-line-through text-muted">₹{{ product.price }}</span>
+                <span class="fw-bold text-danger">₹{{ product.discount_price }}</span>
+            {% else %}
+                ₹{{ product.price }}
+            {% endif %}
+        </h4>
+        <button class="btn btn-success mt-3">Add to Cart</button>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home - E-Commerce{% endblock %}
+{% block content %}
+
+<!-- Hero Section -->
+<div class="p-5 mb-4 bg-light rounded-3 text-center">
+    <div class="container py-5">
+        <h1 class="display-5 fw-bold">Welcome to Our E-Commerce Store</h1>
+        <p class="fs-5">Discover top products and exclusive offers today!</p>
+        <a href="{% url 'product_list' %}" class="btn btn-primary btn-lg">Shop Now</a>
+    </div>
+</div>
+
+<!-- Categories -->
+<div class="container my-5">
+    <h3 class="mb-4">Shop by Category</h3>
+    <div class="row">
+        {% for category in categories %}
+        <div class="col-md-3 mb-4">
+            <div class="card text-center shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ category.name }}</h5>
+                    <p class="card-text text-muted">{{ category.description|truncatechars:70 }}</p>
+                    <a href="{% url 'category_products' category.slug %}" class="btn btn-outline-primary btn-sm">View</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+            <p>No categories available.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Featured Products -->
+<div class="container my-5">
+    <h3 class="mb-4">Featured Products</h3>
+    <div class="row">
+        {% for product in featured_products %}
+        <div class="col-md-3 mb-4">
+            <div class="card h-100">
+                {% if product.main_image %}
+                <img src="{{ product.main_image.url }}" class="card-img-top" alt="{{ product.name }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    {% if product.is_on_sale %}
+                        <p>
+                            <span class="text-muted text-decoration-line-through">₹{{ product.price }}</span>
+                            <span class="fw-bold text-danger">₹{{ product.discount_price }}</span>
+                        </p>
+                    {% else %}
+                        <p class="fw-bold">₹{{ product.price }}</p>
+                    {% endif %}
+                    <a href="{% url 'product_detail' product.slug %}" class="btn btn-primary btn-sm">View</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+            <p>No featured products available.</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

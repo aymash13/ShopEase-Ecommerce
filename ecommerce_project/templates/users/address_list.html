@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}My Addresses{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-3">My Addresses</h2>
+    <a href="{% url 'address_add' %}" class="btn btn-success mb-3">Add New Address</a>
+
+    {% if addresses %}
+    <div class="list-group">
+        {% for address in addresses %}
+        <div class="list-group-item">
+            <h5>{{ address.full_name }} - {{ address.city }}</h5>
+            <p>{{ address.address_line_1 }}{% if address.address_line_2 %}, {{ address.address_line_2 }}{% endif %}</p>
+            <small>{{ address.state }} - {{ address.postal_code }}, {{ address.country }}</small>
+            <div class="mt-2">
+                <a href="{% url 'address_edit' address.pk %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                <a href="{% url 'address_delete' address.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No addresses found. <a href="{% url 'address_add' %}">Add one now.</a></p>
+    {% endif %}
+</div>
+{% endblock %}
