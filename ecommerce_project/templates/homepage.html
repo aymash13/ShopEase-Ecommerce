@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Home - E-Commerce{% endblock %}
-{% block content %}
 
+{% block title %}Home - E-Commerce{% endblock %}
+
+{% block content %}
 <!-- Hero Section -->
 <div class="p-5 mb-4 bg-light rounded-3 text-center">
     <div class="container py-5">
@@ -12,13 +13,13 @@
     </div>
 </div>
 
-<!-- Categories -->
+<!-- Categories Section -->
 <div class="container my-5">
-    <h3 class="mb-4">Shop by Category</h3>
-    <div class="row">
+    <h3 class="mb-4 text-center">Shop by Category</h3>
+    <div class="row justify-content-center">
         {% for category in categories %}
         <div class="col-md-3 mb-4">
-            <div class="card text-center shadow-sm h-100">
+            <div class="card text-center shadow-sm h-100 border-0">
                 <div class="card-body">
                     <h5 class="card-title">{{ category.name }}</h5>
                     <p class="card-text text-muted">{{ category.description|truncatechars:70 }}</p>
@@ -27,18 +28,18 @@
             </div>
         </div>
         {% empty %}
-            <p>No categories available.</p>
+            <p class="text-center text-muted">No categories available.</p>
         {% endfor %}
     </div>
 </div>
 
-<!-- Featured Products -->
+<!-- Featured Products Section -->
 <div class="container my-5">
-    <h3 class="mb-4">Featured Products</h3>
+    <h3 class="mb-4 text-center">Featured Products</h3>
     <div class="row">
         {% for product in featured_products %}
         <div class="col-md-3 mb-4">
-            <div class="card h-100">
+            <div class="card h-100 shadow-sm border-0">
                 {% if product.main_image %}
                 <img src="{{ product.main_image.url }}" class="card-img-top" alt="{{ product.name }}">
                 {% endif %}
@@ -57,9 +58,8 @@
             </div>
         </div>
         {% empty %}
-            <p>No featured products available.</p>
+            <p class="text-center text-muted">No featured products available.</p>
         {% endfor %}
     </div>
 </div>
-
 {% endblock %}

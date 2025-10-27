@@ -1,23 +1,65 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}{{ product.name }} - E-Commerce{% endblock %}
+
 {% block content %}
-<div class="row">
-    <div class="col-md-6">
-        <img src="{{ product.main_image.url }}" class="img-fluid rounded shadow-sm" alt="{{ product.name }}">
-    </div>
-    <div class="col-md-6">
-        <h2>{{ product.name }}</h2>
-        <p class="text-muted">{{ product.category.name }}</p>
-        <p>{{ product.description }}</p>
-        <h4>
-            {% if product.is_on_sale %}
-                <span class="text-decoration-line-through text-muted">₹{{ product.price }}</span>
-                <span class="fw-bold text-danger">₹{{ product.discount_price }}</span>
+<div class="container my-5">
+    <div class="row">
+        <!-- 🖼️ Product Image -->
+        <div class="col-md-5">
+            {% if product.main_image %}
+                <img src="{{ product.main_image.url }}" class="img-fluid rounded shadow-sm" alt="{{ product.name }}">
             {% else %}
-                ₹{{ product.price }}
+                <img src="{% static 'images/no-image.jpg' %}" class="img-fluid rounded shadow-sm" alt="No image available">
             {% endif %}
-        </h4>
-        <button class="btn btn-success mt-3">Add to Cart</button>
+            <div class="mt-3 d-flex flex-wrap gap-2">
+                {% for img in images %}
+                    <img src="{{ img.image.url }}" width="80" class="border rounded" alt="{{ img.alt_text }}">
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- 📦 Product Details -->
+        <div class="col-md-7">
+            <h2>{{ product.name }}</h2>
+            <p class="text-muted">{{ product.category.name }}</p>
+            <hr>
+
+            {% if product.is_on_sale %}
+                <h4>
+                    <span class="text-muted text-decoration-line-through">₹{{ product.price }}</span>
+                    <span class="fw-bold text-danger">₹{{ product.discount_price }}</span>
+                </h4>
+            {% else %}
+                <h4 class="fw-bold">₹{{ product.price }}</h4>
+            {% endif %}
+
+            <p class="mt-3">{{ product.description }}</p>
+
+            {% if variants %}
+                <h6>Available Variants:</h6>
+                <ul>
+                    {% for variant in variants %}
+                        <li>{{ variant.variant_name }}: {{ variant.variant_value }} (+₹{{ variant.additional_price }})</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <!-- 🛒 Add to Cart Form -->
+            <form action="{% url 'add_to_cart' product.id %}" method="post" class="mt-4 d-flex align-items-center gap-3">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="bi bi-cart-plus"></i> Add to Cart
+                </button>
+            </form>
+
+            <!-- 🔗 Link to Cart -->
+            <div class="mt-3">
+                <a href="{% url 'cart_detail' %}" class="btn btn-outline-secondary btn-sm">
+                    View Cart
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

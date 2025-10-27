@@ -8,6 +8,7 @@ urlpatterns = [
     path('', include('home.urls')),       # Homepage app
     path('users/', include('users.urls')), # Users app
     path('products/', include('products.urls')), #products
+    path('cart/', include('cart.urls')), # cart
 
 ]
 
