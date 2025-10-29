@@ -9,7 +9,8 @@ urlpatterns = [
     path('users/', include('users.urls')), # Users app
     path('products/', include('products.urls')), #products
     path('cart/', include('cart.urls')), # cart
-
+    path('orders/', include('orders.urls')), # orders 
+    path('checkout/', include('checkout.urls')), #checkout
 ]
 
 # Serve media files during development

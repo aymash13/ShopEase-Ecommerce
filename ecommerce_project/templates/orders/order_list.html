@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}My Orders{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="mb-4 text-center">🧾 My Orders</h2>
+
+    {% if orders %}
+        <table class="table table-bordered table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>#{{ order.id }}</td>
+                    <td>{{ order.created_at|date:"M d, Y H:i" }}</td>
+                    <td>₹{{ order.total_amount }}</td>
+                    <td>
+                        {% if order.status == 'CANCELLED' %}
+                            <span class="badge bg-danger">{{ order.status }}</span>
+                        {% elif order.status == 'DELIVERED' %}
+                            <span class="badge bg-success">{{ order.status }}</span>
+                        {% elif order.status == 'SHIPPED' %}
+                            <span class="badge bg-info text-dark">{{ order.status }}</span>
+                        {% else %}
+                            <span class="badge bg-warning text-dark">{{ order.status }}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'order_detail' order.pk %}" class="btn btn-sm btn-outline-primary">
+                            View
+                        </a>
+
+                        {% if order.can_cancel %}
+                            <form action="{% url 'cancel_order' order.pk %}" method="post" class="d-inline"
+                                  onsubmit="return confirm('Are you sure you want to cancel this order?');">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-danger">Cancel</button>
+                            </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="text-center text-muted">You haven’t placed any orders yet.</p>
+        <div class="text-center mt-3">
+            <a href="{% url 'product_list' %}" class="btn btn-outline-primary">Start Shopping</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

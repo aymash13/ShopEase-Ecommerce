@@ -1,54 +1,73 @@
 {% extends 'base.html' %}
 {% block title %}Your Cart{% endblock %}
 {% block content %}
-<h2 class="mb-4 text-center">Your Cart</h2>
 
-{% if cart_items %}
-<table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>Product</th>
-      <th>Price</th>
-      <th>Quantity</th>
-      <th>Subtotal</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for item in cart_items %}
-    <tr>
-      <td>{{ item.product.name }}</td>
-      <td>₹{{ item.product.discount_price|default:item.product.price }}</td>
-      <td>
-        <form method="post" action="{% url 'update_quantity' item.pk %}" class="d-inline">
-          {% csrf_token %}
-          <button name="action" value="decrease" class="btn btn-sm btn-outline-secondary">−</button>
-          <span class="mx-2">{{ item.quantity }}</span>
-          <button name="action" value="increase" class="btn btn-sm btn-outline-secondary">+</button>
-        </form>
-      </td>
-      <td>₹{{ item.subtotal }}</td>
-      <td>
-        <form method="post" action="{% url 'remove_from_cart' item.pk %}">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-sm btn-danger">Remove</button>
-        </form>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<div class="container my-5">
+  <h2 class="mb-4 text-center">🛒 Your Cart</h2>
 
-<h4 class="text-end">Total: ₹{{ total }}</h4>
+  {% if cart_items %}
+  <table class="table table-bordered table-hover align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in cart_items %}
+      <tr>
+        <td>{{ item.product.name }}</td>
+        <td>₹{{ item.product.discount_price|default:item.product.price }}</td>
+        <td>
+          <form method="post" action="{% url 'update_quantity' item.pk %}" class="d-inline">
+            {% csrf_token %}
+            <button name="action" value="decrease" class="btn btn-sm btn-outline-secondary">−</button>
+            <span class="mx-2">{{ item.quantity }}</span>
+            <button name="action" value="increase" class="btn btn-sm btn-outline-secondary">+</button>
+          </form>
+        </td>
+        <td>₹{{ item.subtotal }}</td>
+        <td>
+          <form method="post" action="{% url 'remove_from_cart' item.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+          </form>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
-<div class="text-end mt-3">
-  <a href="{% url 'product_list' %}" class="btn btn-outline-primary">Continue Shopping</a>
+  <!-- 🧾 Cart Total & Checkout -->
+  <div class="d-flex justify-content-between align-items-center mt-4">
+    <h4 class="mb-0">Total: ₹{{ total }}</h4>
+
+    <div>
+      <a href="{% url 'product_list' %}" class="btn btn-outline-primary me-2">
+        Continue Shopping
+      </a>
+
+      <!-- ✅ Proceed to Checkout -->
+      <form action="{% url 'checkout' %}" method="post" class="d-inline">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success">
+          Proceed to Checkout
+        </button>
+      </form>
+    </div>
+  </div>
+
+  {% else %}
+  <div class="text-center text-muted py-5">
+    <p class="fs-5">Your cart is empty.</p>
+    <a href="{% url 'product_list' %}" class="btn btn-outline-primary btn-sm mt-2">
+      Start Shopping
+    </a>
+  </div>
+  {% endif %}
 </div>
 
-{% else %}
-<p class="text-center text-muted">
-  Your cart is empty.
-  <a href="{% url 'product_list' %}" class="btn btn-outline-primary btn-sm ms-2">Go Shopping</a>
-</p>
-{% endif %}
 {% endblock %}

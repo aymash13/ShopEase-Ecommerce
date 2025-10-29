@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Order Confirmation{% endblock %}
+{% block content %}
+<div class="container my-5 text-center">
+    <h2 class="mb-4 text-success">✅ Order Confirmed!</h2>
+    <p>Thank you for your purchase, {{ user.username }}.</p>
+
+    <div class="card mx-auto mt-4" style="max-width: 600px;">
+        <div class="card-body">
+            <h5 class="card-title">Order #{{ order.id }}</h5>
+            <p><strong>Status:</strong> {{ order.status|title }}</p>
+            <p><strong>Total:</strong> ₹{{ order.total_price }}</p>
+
+            <h6 class="mt-4">Items:</h6>
+            <ul class="list-group">
+                {% for item in order.items.all %}
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>{{ item.product.name }} × {{ item.quantity }}</span>
+                    <span>₹{{ item.subtotal }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a href="{% url 'product_list' %}" class="btn btn-primary">Continue Shopping</a>
+    </div>
+</div>
+{% endblock %}
