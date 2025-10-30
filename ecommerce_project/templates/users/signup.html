@@ -1,26 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Sign Up{% endblock %}
+
 {% block content %}
-<link rel="stylesheet" href="{% static 'user/style.css' %}">
-<div class="col-md-6 col-lg-4 mx-auto mt-5">
-    <div class="card signup-card shadow-lg border-0 rounded-4">
-        <div class="card-body p-4">
-            <h2 class="text-center mb-4 fw-bold text-primary">Create Account</h2>
-            <form method="POST" class="needs-validation" novalidate>
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold">
-                    Sign Up
-                </button>
-            </form>
-            <p class="mt-4 text-center text-muted">
-                Already have an account?
-                <a href="{% url 'login' %}" class="text-primary fw-semibold text-decoration-none">
-                    Login
-                </a>
-            </p>
-        </div>
+<link rel="stylesheet" href="{% static 'users/signup.css' %}">
+
+<div class="signup-wrapper">
+    <div class="signup-card">
+        <h2 class="signup-title">Create Account</h2>
+        <form method="POST" class="signup-form" novalidate>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="signup-btn">Sign Up</button>
+        </form>
+        <p class="signup-footer">
+            Already have an account?
+            <a href="{% url 'login' %}" class="login-link">Login</a>
+        </p>
     </div>
 </div>
 {% endblock %}

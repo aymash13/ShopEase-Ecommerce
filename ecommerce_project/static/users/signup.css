@@ -1,0 +1,128 @@
+/* ===== Sign Up Page Styling ===== */
+
+/* Color Palette */
+:root {
+  --primary: #2F80ED;
+  --secondary: #56CCF2;
+  --background: #F8FAFC;
+  --card: #FFFFFF;
+  --text-primary: #1E293B;
+  --text-secondary: #64748B;
+  --success: #10B981;
+  --error: #EF4444;
+  --border: #E2E8F0;
+}
+
+/* Page Layout */
+body {
+  background-color: var(--background);
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-primary);
+}
+
+/* Wrapper for centering */
+.signup-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+  padding: 1rem;
+}
+
+/* Card Styling */
+.signup-card {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  width: 100%;
+  max-width: 420px;
+  transition: all 0.3s ease;
+}
+
+.signup-card:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Title */
+.signup-title {
+  text-align: center;
+  color: var(--primary);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  font-size: 1.75rem;
+}
+
+/* Form */
+.signup-form label {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.signup-form input {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  background-color: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.signup-form input:focus {
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 3px rgba(86, 204, 242, 0.25);
+  outline: none;
+}
+
+/* Button */
+.signup-btn {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 100%;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.signup-btn:hover {
+  background-color: var(--secondary);
+  transform: translateY(-2px);
+}
+
+/* Footer */
+.signup-footer {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-top: 1.25rem;
+}
+
+.login-link {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.login-link:hover {
+  color: var(--secondary);
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .signup-card {
+    padding: 1.5rem;
+  }
+
+  .signup-title {
+    font-size: 1.5rem;
+  }
+}

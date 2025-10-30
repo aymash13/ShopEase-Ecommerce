@@ -1,0 +1,184 @@
+/* ===== CART PAGE STYLING ===== */
+
+:root {
+  --primary: #2F80ED;
+  --secondary: #56CCF2;
+  --success: #10B981;
+  --danger: #EF4444;
+  --danger-hover: #DC2626;
+  --background: #F8FAFC;
+  --card: #FFFFFF;
+  --border: #E2E8F0;
+  --text-primary: #1E293B;
+  --text-secondary: #64748B;
+}
+
+body {
+  background-color: var(--background);
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-primary);
+}
+
+/* Container */
+.cart-container {
+  max-width: 950px;
+  margin: 3rem auto;
+  background: var(--card);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Title */
+.cart-title {
+  text-align: center;
+  font-size: 1.8rem;
+  color: var(--primary);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+/* Table */
+.cart-table-wrapper {
+  overflow-x: auto;
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cart-table th {
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-weight: 600;
+  text-align: center;
+  padding: 0.75rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.cart-table td {
+  text-align: center;
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+/* Quantity Buttons */
+.quantity-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-qty {
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  border-radius: 0.4rem;
+  width: 32px;
+  height: 32px;
+  line-height: 1;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-qty:hover {
+  background-color: var(--secondary);
+  color: #fff;
+}
+
+.qty-value {
+  margin: 0 0.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Remove Button */
+.btn-remove {
+  background-color: var(--danger);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-remove:hover {
+  background-color: var(--danger-hover);
+  transform: translateY(-2px);
+}
+
+/* Footer */
+.cart-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.cart-total {
+  font-size: 1.3rem;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--success);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.7rem 1.2rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0ea769;
+}
+
+.btn-outline {
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  background: transparent;
+  border-radius: 0.5rem;
+  padding: 0.7rem 1.2rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background-color: var(--secondary);
+  color: white;
+}
+
+/* Empty Cart */
+.empty-cart {
+  text-align: center;
+  padding: 3rem 0;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+.empty-cart .btn-outline.small {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cart-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cart-total {
+    margin-bottom: 1rem;
+  }
+}

@@ -4,35 +4,36 @@
 {% block title %}Shop - E-Commerce{% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'products/style.css' %}">
+<link rel="stylesheet" href="{% static 'products/product_list.css' %}">
 
-<div class="container my-4">
-    <h2 class="mb-4 text-center">Shop Products</h2>
+<!-- Scoped Wrapper -->
+<div class="shop-page container my-4">
+    <h2 class="mb-4 text-center shop-title">Shop Products</h2>
 
     <!-- Search Bar -->
-    <form method="get" class="d-flex justify-content-center mb-4">
-        <input type="text" name="q" class="form-control w-50" placeholder="Search for products..." value="{{ request.GET.q }}">
-        <button type="submit" class="btn btn-primary ms-2">Search</button>
+    <form method="get" class="d-flex justify-content-center mb-4 shop-search">
+        <input type="text" name="q" class="form-control w-50 shop-search-input" placeholder="Search for products..." value="{{ request.GET.q }}">
+        <button type="submit" class="btn shop-btn-primary ms-2">Search</button>
     </form>
 
     <!-- Category Filter -->
-    <div class="d-flex justify-content-center mb-4 flex-wrap gap-2">
-        <a href="{% url 'product_list' %}" class="btn btn-outline-secondary {% if not selected_category %}active{% endif %}">
+    <div class="d-flex justify-content-center mb-4 flex-wrap gap-2 shop-category-filter">
+        <a href="{% url 'product_list' %}" class="shop-btn-outline {% if not selected_category %}active{% endif %}">
             All
         </a>
         {% for category in categories %}
         <a href="{% url 'category_products' category.slug %}" 
-           class="btn btn-outline-secondary {% if selected_category and selected_category.slug == category.slug %}active{% endif %}">
+           class="shop-btn-outline {% if selected_category and selected_category.slug == category.slug %}active{% endif %}">
             {{ category.name }}
         </a>
         {% endfor %}
     </div>
 
     <!-- Product Grid -->
-    <div class="row">
+    <div class="row shop-product-grid">
         {% for product in products %}
         <div class="col-md-3 mb-4 d-flex justify-content-center">
-            <div class="card shadow-sm border-0" style="width: 18rem; border-radius: 12px; overflow: hidden; position: relative;">
+            <div class="shop-card card shadow-sm border-0">
                 {% if product.is_on_sale %}
                     <span class="badge-sale">SALE</span>
                 {% endif %}
@@ -57,12 +58,12 @@
 
                     <div class="d-flex justify-content-center gap-2 mt-3">
                         <!-- View Details -->
-                        <a href="{% url 'product_detail' product.slug %}" class="btn btn-outline-primary btn-sm px-3">Details</a>
+                        <a href="{% url 'product_detail' product.slug %}" class="btn shop-btn-outline-primary btn-sm px-3">Details</a>
 
                         <!-- Add to Cart -->
                         <form method="post" action="{% url 'add_to_cart' product.pk %}">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-success btn-sm px-3">Add to Cart</button>
+                            <button type="submit" class="btn shop-btn-success btn-sm px-3">Add to Cart</button>
                         </form>
                     </div>
                 </div>
@@ -74,14 +75,14 @@
     </div>
 
     <!-- Pagination -->
-    <div class="d-flex justify-content-center mt-4">
+    <div class="d-flex justify-content-center mt-4 shop-pagination">
         {% if is_paginated %}
             {% if page_obj.has_previous %}
-                <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary btn-sm me-2">Previous</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="btn shop-btn-outline-primary btn-sm me-2">Previous</a>
             {% endif %}
             <span class="align-self-center">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
             {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary btn-sm ms-2">Next</a>
+                <a href="?page={{ page_obj.next_page_number }}" class="btn shop-btn-outline-primary btn-sm ms-2">Next</a>
             {% endif %}
         {% endif %}
     </div>

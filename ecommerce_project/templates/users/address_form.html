@@ -1,12 +1,19 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block title %}Add / Edit Address{% endblock %}
+
 {% block content %}
-<div class="col-md-6 mx-auto mt-5">
-    <h2 class="text-center mb-4">Address</h2>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary w-100">Save</button>
-    </form>
+<link rel="stylesheet" href="{% static 'users/address_form.css' %}">
+
+<div class="address-form-wrapper">
+    <div class="address-form-card">
+        <h2 class="address-form-title">Add / Edit Address</h2>
+        <form method="POST" class="address-form" novalidate>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="address-btn-save">Save</button>
+        </form>
+    </div>
 </div>
 {% endblock %}

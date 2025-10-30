@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}My Orders{% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'orders/order_list.css' %}">
+
 <div class="container my-5">
     <h2 class="mb-4 text-center">🧾 My Orders</h2>
 

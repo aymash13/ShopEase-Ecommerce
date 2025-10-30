@@ -1,0 +1,119 @@
+/* ===== ORDER CONFIRMATION PAGE ===== */
+
+.order-confirmation {
+  --primary: #2F80ED;
+  --secondary: #56CCF2;
+  --background: #F8FAFC;
+  --card: #FFFFFF;
+  --border: #E2E8F0;
+  --text-primary: #1E293B;
+  --text-secondary: #64748B;
+  --success: #10B981;
+  --error: #EF4444;
+
+  background-color: var(--background);
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-primary);
+  min-height: 85vh;
+}
+
+/* Confirmation Box */
+.confirmation-box {
+  background-color: var(--card);
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  padding: 2.5rem;
+  max-width: 700px;
+}
+
+/* Success Icon */
+.icon-box {
+  font-size: 4rem;
+  color: var(--success);
+  margin-bottom: 1rem;
+}
+
+/* Card Styling */
+.order-card {
+  background-color: var(--background);
+  border-radius: 0.8rem;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.order-header {
+  background-color: var(--primary);
+  color: #fff;
+  padding: 1rem 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-header h5 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.status {
+  background-color: #fff;
+  color: var(--primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.3rem 0.8rem;
+  border-radius: 2rem;
+}
+
+.order-body {
+  padding: 1.5rem;
+}
+
+.order-total {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Item List */
+.order-items .list-group-item {
+  background-color: #fff;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.95rem;
+  padding: 0.9rem 1rem;
+}
+
+.order-items .list-group-item:last-child {
+  border-bottom: none;
+}
+
+/* Button */
+.btn-continue-shopping {
+  display: inline-block;
+  background-color: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  padding: 0.7rem 1.5rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-continue-shopping:hover {
+  background-color: var(--secondary);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .confirmation-box {
+    padding: 1.8rem;
+  }
+  .icon-box {
+    font-size: 3rem;
+  }
+  .order-header h5 {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,112 @@
+/* ===== Add/Edit Address Page Styling ===== */
+
+/* Color Palette */
+:root {
+  --primary: #2F80ED;
+  --secondary: #56CCF2;
+  --background: #F8FAFC;
+  --card: #FFFFFF;
+  --text-primary: #1E293B;
+  --text-secondary: #64748B;
+  --success: #10B981;
+  --error: #EF4444;
+  --border: #E2E8F0;
+}
+
+/* Layout */
+body {
+  background-color: var(--background);
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-primary);
+}
+
+/* Wrapper */
+.address-form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+/* Card */
+.address-form-card {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 500px;
+  padding: 2rem;
+  transition: box-shadow 0.3s ease;
+}
+
+.address-form-card:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Title */
+.address-form-title {
+  text-align: center;
+  color: var(--primary);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  font-size: 1.75rem;
+}
+
+/* Form */
+.address-form label {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.address-form input,
+.address-form select,
+.address-form textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  background-color: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.address-form input:focus,
+.address-form select:focus,
+.address-form textarea:focus {
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 3px rgba(86, 204, 242, 0.25);
+  outline: none;
+}
+
+/* Button */
+.address-btn-save {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  width: 100%;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.address-btn-save:hover {
+  background-color: var(--secondary);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .address-form-card {
+    padding: 1.5rem;
+  }
+
+  .address-form-title {
+    font-size: 1.5rem;
+  }
+}

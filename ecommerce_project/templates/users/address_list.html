@@ -1,26 +1,39 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}My Addresses{% endblock %}
+
 {% block content %}
-<div class="container mt-4">
-    <h2 class="mb-3">My Addresses</h2>
-    <a href="{% url 'address_add' %}" class="btn btn-success mb-3">Add New Address</a>
+<link rel="stylesheet" href="{% static 'users/address.css' %}">
+
+<div class="address-wrapper container">
+    <div class="address-header">
+        <h2>My Addresses</h2>
+        <a href="{% url 'address_add' %}" class="address-btn-add">Add New Address</a>
+    </div>
 
     {% if addresses %}
-    <div class="list-group">
-        {% for address in addresses %}
-        <div class="list-group-item">
-            <h5>{{ address.full_name }} - {{ address.city }}</h5>
-            <p>{{ address.address_line_1 }}{% if address.address_line_2 %}, {{ address.address_line_2 }}{% endif %}</p>
-            <small>{{ address.state }} - {{ address.postal_code }}, {{ address.country }}</small>
-            <div class="mt-2">
-                <a href="{% url 'address_edit' address.pk %}" class="btn btn-sm btn-outline-primary">Edit</a>
-                <a href="{% url 'address_delete' address.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+        <div class="address-list">
+            {% for address in addresses %}
+            <div class="address-card">
+                <h5 class="address-name">{{ address.full_name }} <span class="address-city">– {{ address.city }}</span></h5>
+                <p class="address-line">
+                    {{ address.address_line_1 }}
+                    {% if address.address_line_2 %}, {{ address.address_line_2 }}{% endif %}
+                </p>
+                <p class="address-meta">
+                    {{ address.state }} - {{ address.postal_code }}, {{ address.country }}
+                </p>
+                <div class="address-actions">
+                    <a href="{% url 'address_edit' address.pk %}" class="btn-outline primary">Edit</a>
+                    <a href="{% url 'address_delete' address.pk %}" class="btn-outline danger">Delete</a>
+                </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
     {% else %}
-    <p>No addresses found. <a href="{% url 'address_add' %}">Add one now.</a></p>
+        <p class="no-address">No addresses found. 
+            <a href="{% url 'address_add' %}" class="address-link">Add one now.</a>
+        </p>
     {% endif %}
 </div>
 {% endblock %}

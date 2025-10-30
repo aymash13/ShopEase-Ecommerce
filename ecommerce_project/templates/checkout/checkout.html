@@ -1,31 +1,54 @@
 {% extends 'base.html' %}
-{% block title %}Checkout{% endblock %}
+{% load static %}
+{% block title %}Checkout - E-Commerce{% endblock %}
+
 {% block content %}
-<div class="container my-5">
-  <h2 class="text-center mb-4">🧾 Checkout</h2>
+<link rel="stylesheet" href="{% static 'checkout/checkout.css' %}">
 
-  <div class="row">
-    <div class="col-md-6">
-      <h4>Shipping Details</h4>
-      <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-success mt-3">Confirm Order</button>
-      </form>
-    </div>
+<div class="checkout-page py-5">
+  <div class="container checkout-container">
+    <h2 class="text-center mb-5">🧾 Checkout</h2>
 
-    <div class="col-md-6">
-      <h4>Your Order Summary</h4>
-      <ul class="list-group mb-3">
-        {% for item in cart_items %}
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          {{ item.product.name }} × {{ item.quantity }}
-          <span>₹{{ item.subtotal }}</span>
-        </li>
-        {% endfor %}
-      </ul>
-      <h5 class="text-end">Total: ₹{{ total }}</h5>
+    <div class="row g-4">
+      <!-- 🏠 Shipping Details -->
+      <div class="col-md-6">
+        <div class="checkout-card">
+          <h4 class="section-title">Shipping Details</h4>
+          <form method="post" class="checkout-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-confirm-order">
+              <i class="bi bi-bag-check"></i> Confirm Order
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- 🛍️ Order Summary -->
+      <div class="col-md-6">
+        <div class="checkout-card">
+          <h4 class="section-title">Your Order Summary</h4>
+          <ul class="order-summary list-group mb-4">
+            {% for item in cart_items %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <div>
+                <span class="product-name">{{ item.product.name }}</span>
+                <small class="text-muted">× {{ item.quantity }}</small>
+              </div>
+              <span class="product-price">₹{{ item.subtotal }}</span>
+            </li>
+            {% empty %}
+            <li class="list-group-item text-center text-muted">Your cart is empty.</li>
+            {% endfor %}
+          </ul>
+
+          <div class="total-section text-end">
+            <h5>Total: <span class="total-amount">₹{{ total }}</span></h5>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
 {% endblock %}

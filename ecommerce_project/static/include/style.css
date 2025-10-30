@@ -1,54 +1,206 @@
-/* General layout */
-html, body {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    background-color: #f8f9fa;
+/* ============================================
+   Color Palette
+============================================ */
+:root {
+  --primary: #2f80ed;
+  --secondary: #56ccf2;
+  --background: #f8fafc;
+  --card: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --success: #10b981;
+  --error: #ef4444;
+  --border: #e2e8f0;
 }
 
-.container {
-    flex: 1;
+/* ============================================
+   Base Styles
+============================================ */
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  line-height: 1.6;
+}
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: var(--secondary);
 }
 
-/* Navbar styling */
+/* ============================================
+   Navbar
+============================================ */
 .navbar {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+  background-color: var(--primary) !important;
 }
-
 .navbar-brand {
-    font-weight: 600;
-    font-size: 1.4rem;
-    letter-spacing: 0.5px;
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+  color: #fff !important;
+}
+.navbar-nav .nav-link {
+  color: #e2e8f0 !important;
+  transition: color 0.3s ease;
+}
+.navbar-nav .nav-link:hover {
+  color: #fff !important;
+}
+.navbar-nav .nav-link.active {
+  color: #fff !important;
+  font-weight: 600;
 }
 
-.nav-link {
-    margin-left: 0.8rem;
-    margin-right: 0.8rem;
-    font-size: 1rem;
-    transition: color 0.3s ease;
+/* ============================================
+   Buttons
+============================================ */
+.btn-primary {
+  background-color: var(--primary);
+  border: none;
+  transition: background-color 0.3s ease;
+}
+.btn-primary:hover {
+  background-color: var(--secondary);
+}
+.btn-outline-primary {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+.btn-outline-primary:hover {
+  background-color: var(--primary);
+  color: #fff;
 }
 
-.nav-link:hover {
-    color: #0d6efd !important;
+/* ============================================
+   Hero Section
+============================================ */
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  min-height: 70vh;
+  border-radius: 12px;
+  padding: 60px 20px;
+  box-shadow: 0 8px 18px rgba(47, 128, 237, 0.2);
+}
+.hero-section h1 {
+  font-weight: 700;
+  font-size: 2.5rem;
+}
+.hero-section p {
+  font-size: 1.2rem;
+  margin: 15px 0 25px;
+}
+.hero-section .btn-light {
+  background: #fff;
+  color: var(--primary);
+  border: none;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 12px 28px;
+  transition: all 0.3s ease;
+}
+.hero-section .btn-light:hover {
+  background: var(--secondary);
+  color: #fff;
 }
 
-/* Footer styling */
+/* ============================================
+   Section Headings
+============================================ */
+h3 {
+  color: var(--text-primary);
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+}
+h3::after {
+  content: "";
+  display: block;
+  width: 50%;
+  height: 3px;
+  background: var(--primary);
+  margin: 10px auto 0;
+  border-radius: 5px;
+}
+
+/* ============================================
+   Category Cards
+============================================ */
+.card.text-center {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+.card.text-center:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(47, 128, 237, 0.15);
+}
+.card.text-center .card-title {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+.card.text-center .card-text {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* ============================================
+   Featured Products
+============================================ */
+.card img {
+  height: 220px;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  transition: transform 0.3s ease;
+}
+.card:hover img {
+  transform: scale(1.05);
+}
+.card .card-body {
+  padding: 15px;
+}
+.card .card-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.card .fw-bold {
+  color: var(--text-primary);
+}
+.text-danger {
+  color: var(--error) !important;
+}
+
+/* ============================================
+   Footer
+============================================ */
 footer {
-    background-color: #212529;
-    color: #ccc;
-    text-align: center;
-    padding: 1.2rem 0;
-    font-size: 0.95rem;
-    margin-top: auto;
+  background-color: var(--primary);
+  color: #ffffff;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  padding: 20px 0;
 }
 
-footer a {
-    color: #0d6efd;
-    text-decoration: none;
-}
-
-footer a:hover {
-    text-decoration: underline;
+/* ============================================
+   Responsive Design
+============================================ */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 60px 15px;
+  }
+  .hero-section h1 {
+    font-size: 2rem;
+  }
+  .card img {
+    height: 180px;
+  }
 }
